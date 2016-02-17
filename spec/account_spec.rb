@@ -1,7 +1,7 @@
 require './lib/Account.rb'
 describe Account do
   subject do
-    described_class.new(account_number:10,ammount:500, pin_number:121)
+    described_class.new(account_number:10, balance:500, pin_number:121, expire_date: (Date.today+1).strftime('%Y-%m-%d'), card_status:'valid')
   end
     it 'Returns nigative ammount for balance  message' do
       subject.balance =-1
@@ -18,4 +18,9 @@ describe Account do
       message = {status: false, message: 'No pin number for account', date: Date.today.strftime('%Y-%m-%d')}
       expect(subject.checkstatus(pin_number:subject.pin_number)).to eq message
     end
+    # it 'Returns expired account' do
+    #   subject.expire_date =(Date.today -1).strftime('%Y-%m-%d')
+    #   message = {status: false, message: 'Expired account', date: Date.today.strftime('%Y-%m-%d')}
+    #   expect(subject.checkstatus(expire_date:subject.expire_date)).to eq message
+    # end
 end
