@@ -21,3 +21,13 @@ describe ATM do
     expect(subject.withdraw(9)).to eq message
   end
 end
+describe PERSON do
+  subject do
+    described_class.new(person_id:1, address:'Stockhom', pin_number:10, expir_date: Date.today.strftime('%Y-%m-%d'), card_status:'valid', ammount_cash:0 )
+  end
+  it 'returns a expird card message' do
+    message = { status: false, message: 'Expired card', date: Date.today.strftime('%Y-%m-%d')}
+    expect(subject.checkstatus()).to eq message
+  end
+
+end

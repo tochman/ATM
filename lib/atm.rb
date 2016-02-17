@@ -32,3 +32,32 @@ class ATM
     message
   end
 end
+
+class PERSON
+  attr_accessor :name, :address, :pin_number, :expir_date, :card_status, :ammount_cash
+  def initialize(person_id, name, address, pin_number, expir_date, card_status, ammount_cash)
+      @person_id = person_id
+      @name = name
+      @address = address
+      @pin_number = pin_number
+      @expir_date = expir_date
+      @card_status = card_status
+      @ammount_cash = ammount_cash
+  end
+
+    def checkstatus()
+      if @expir_date < Date.today
+        message = { status: false, message: 'Expired card', date: Date.today.strftime('%Y-%m-%d')}
+      end
+    end
+end
+
+class ACCOUNT
+  attr_accessor :ammount
+  def initialize(account_id, person_id, amount, pin_number)
+      @account_id = account_id
+      @person_id =person_id
+      @amount = ammount
+      @pin_number = pin_number
+    end
+end
