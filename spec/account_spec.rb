@@ -1,12 +1,17 @@
 require './lib/Account.rb'
 describe Account do
   subject do
-    described_class.new(ammount:500, pin_number:121)
+    described_class.new(account_number:10,ammount:500, pin_number:121)
   end
     it 'Returns nigative ammount for balance  message' do
       subject.balance =-1
       message = {status: false, message: 'Nigative ammount for balance for account', date: Date.today.strftime('%Y-%m-%d')}
       expect(subject.checkstatus(balance:subject.balance)).to eq message
+    end
+    it 'Returns no account number  message' do
+      subject.account_number =''
+      message = {status: false, message: 'No account number for account', date: Date.today.strftime('%Y-%m-%d')}
+      expect(subject.checkstatus(account_number:subject.account_number)).to eq message
     end
     it 'Returns no pin number message' do
       subject.pin_number =''
