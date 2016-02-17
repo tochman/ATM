@@ -6,7 +6,7 @@ describe ATM do
   end
 
   it 'returns a sucsessful message' do
-    message = { status: true, message: 'Success', date: Date.today.strftime('%Y-%m-%d') }
+    message = { status: true, message: 'Success', date: Date.today.strftime('%Y-%m-%d'), amount: 100 }
     expect(subject.withdraw(100)).to eq message
   end
 
