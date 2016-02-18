@@ -11,20 +11,20 @@ class Account
     @card_status = :valid
     @account_number = generate_an_account_number
   end
-
-  def checkstatus(options = {})
-    if options[:balance]
-      message = { status: false, message: 'Nigative ammount for balance for account', date: Date.today.strftime('%Y-%m-%d') }
-    elsif options[:pin_number]
-      message = { status: false, message: 'No pin number for account', date: Date.today.strftime('%Y-%m-%d') }
-    elsif options[:account_number]
-      message = { status: false, message: 'No account number for account', date: Date.today.strftime('%Y-%m-%d') }
-    # elsif options[:expire_date]
-    #   expired_account()
-
-  end
-  end
-
+  #
+  # def checkstatus(options = {})
+  #   if options[:balance]
+  #     message = {status: false, message: 'Nigative ammount for balance for account', date: Date.today.strftime('%Y-%m-%d')}
+  #   elsif options[:pin_number]
+  #     message = {status: false, message: 'No pin number for account', date: Date.today.strftime('%Y-%m-%d')}
+  #   elsif options[:account_number]
+  #     message = {status: false, message: 'No account number for account', date: Date.today.strftime('%Y-%m-%d')}
+  #     # elsif options[:expire_date]
+  #     #   expired_account()
+  #
+  #   end
+  # end
+  #
   private
 
   def generate_an_account_number
@@ -38,9 +38,6 @@ class Account
   def set_expire_date
     Date.today.next_year(STANDARD_VALIDITY_YRS).strftime('%m/%y')
   end
-  # def expired_account?(expired_account)
-  #   if expire_date <Date.today.strftime('%Y-%m-%d')
-  #     message = { status: false, message: 'Expired account', date: Date.today.strftime('%Y-%m-%d')}
-  #   end
-  # end
+
+
 end
