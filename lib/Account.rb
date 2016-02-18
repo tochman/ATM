@@ -15,16 +15,16 @@ class Account
         message = { status: false, message: 'No pin number for account', date: Date.today.strftime('%Y-%m-%d')}
       elsif options[:account_number]
       message = { status: false, message: 'No account number for account', date: Date.today.strftime('%Y-%m-%d')}
-      # elsif options[:expire_date]
-      #   expired_account()
+      elsif options[:expire_date]
+        expired_account(expire_date:Date.today.strftime('%Y-%m-%d'))
 
     end
   end
 
-  # private
-  # def expired_account?(expired_account)
-  #   if expire_date <Date.today.strftime('%Y-%m-%d')
-  #     message = { status: false, message: 'Expired account', date: Date.today.strftime('%Y-%m-%d')}
-  #   end
-  # end
+  private
+  def expired_account?(options = {})
+    if expire_date <Date.today.strftime('%Y-%m-%d')
+      message = { status: false, message: options.to_s, date: Date.today.strftime('%Y-%m-%d')}
+    end
+  end
 end

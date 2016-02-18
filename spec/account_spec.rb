@@ -18,9 +18,9 @@ describe Account do
       message = {status: false, message: 'No pin number for account', date: Date.today.strftime('%Y-%m-%d')}
       expect(subject.checkstatus(pin_number:subject.pin_number)).to eq message
     end
-    # it 'Returns expired account' do
-    #   subject.expire_date =(Date.today -1).strftime('%Y-%m-%d')
-    #   message = {status: false, message: 'Expired account', date: Date.today.strftime('%Y-%m-%d')}
-    #   expect(subject.checkstatus(expire_date:subject.expire_date)).to eq message
-    # end
+    it 'Returns expired account' do
+      subject.expire_date =(Date.today -1).strftime('%Y-%m-%d')
+      message = {status: false, message: 'Expired account', date: Date.today.strftime('%Y-%m-%d')}
+      expect(subject.checkstatus(expire_date:subject.expire_date)).to eq message
+    end
 end
