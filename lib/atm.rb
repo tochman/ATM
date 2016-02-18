@@ -14,6 +14,7 @@ class ATM
       when is_entred_pin_number_invalid?(account_object, entered_pin_number)
         message(status: false, message: 'Error. Invalid pin number', amount: amount)
       else
+        account_object.balance=account_object.balance - amount
         message(status: true, message: 'Success', balance: account_object.balance - amount)
     end
   end

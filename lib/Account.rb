@@ -34,9 +34,7 @@ class Account
   def generate_pin_number
     rand(1000..9999)
   end
-  def set_expire_date
-    Date.today.next_year(STANDARD_VALIDITY_YRS).strftime('%d/%m/%Y')
-  end
+
   private
   def expired_account?(options = {})
     if expire_date <Date.today.strftime('%Y-%m-%d')
@@ -44,5 +42,7 @@ class Account
     end
   end
 
-
+  def set_expire_date
+    Date.today.next_year(STANDARD_VALIDITY_YRS).strftime('%m/%Y')
+  end
 end
