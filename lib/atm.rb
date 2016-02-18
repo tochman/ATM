@@ -8,19 +8,22 @@ class ATM
   def withdraw(account_object, entered_pin_number, amount)
     case
       when not_divisible_by_five?(amount)
-        message(status: false, message: 'Amount not divisible by 5')
-      when insufficient_funds_in_account?(account_object,amount)
-        message(status: false, message: 'Insufficient funds')
+        message(message: 'Amount not divisible by 5')
+      when is_account_suspended?(account_object)
+        message(message: 'Card has been deactivated')
       when is_entred_pin_number_invalid?(account_object, entered_pin_number)
-        message(status: false, message: 'Error. Invalid pin number', amount: amount)
+        message(message: 'Error. Invalid pin number')
+      when insufficient_funds_in_account?(account_object, amount)
+        message(message: 'Insufficient funds')
       else
-        message(status: true, message: 'Success', balance: account_object.balance - amount)
+        account_object.balance=account_object.balance - amount
+        message(status: true, message: 'Success', amount: amount)
     end
   end
 
   private
 
-  def insufficient_funds_in_account?(account_object,amount)
+  def insufficient_funds_in_account?(account_object, amount)
     account_object.balance < amount
   end
 
@@ -32,17 +35,16 @@ class ATM
     account.pin_number != pin
   end
 
-  def message(options = {})
-   message = {status: options[:status], message: options[:message]}
-   if options[:amount]
-     message.merge!({amount: options[:amount]})
-   elsif options[:balance]
-     message.merge!({balance: options[:balance]})
-   elsif options[:card_status]
-     message.merge!({card_status: options[:card_status]})
-   else
-     message
+  def is_account_suspended?(account_object)
+    account_object.card_status != :active
   end
-end
+
+  def message(options = {})
+    status = options[:status] || false
+    message = {status: status, message: options[:message], date: Date.today.strftime('%Y-%m-%d')}
+    message.merge!({amount: options[:amount]}) if options[:amount]
+    message
+  end
+
 
 end

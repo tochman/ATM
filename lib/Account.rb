@@ -23,8 +23,6 @@ class Account
   end
 
   def set_expire_date
-    Date.today.next_year(STANDARD_VALIDITY_YRS).strftime('%d/%m/%Y')
+    Date.today.next_year(STANDARD_VALIDITY_YRS).strftime('%m/%Y')
   end
-
-
 end
