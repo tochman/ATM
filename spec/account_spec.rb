@@ -9,7 +9,6 @@ describe Account do
 
   describe 'after creation' do
     it 'has a pin number of 4 digits' do
-      # binding.pry
       length = Math.log10(subject.pin_number).to_i + 1
       expect(length).to eq 4
       expect(subject.pin_number.class).to eq Fixnum
@@ -25,8 +24,6 @@ describe Account do
       date = Date.today.next_year(Account::STANDARD_VALIDITY_YRS).strftime('%d/%m/%Y')
       expect(subject.expire_date).to eq date
     end
-
-
 
     it 'has a status of valid' do
       expect(subject.card_status).to eq :valid
