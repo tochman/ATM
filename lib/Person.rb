@@ -12,6 +12,6 @@ class Person
   def open_account(options={})
     account = Account.new(self, balance: options[:deposit])
     @accounts << account
-    binding.pry
+    # binding.pry
   end
 end

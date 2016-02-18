@@ -9,7 +9,7 @@ describe Account do
 
   describe 'after creation' do
     it 'has a pin number of 4 digits' do
-      binding.pry
+      # binding.pry
       length = Math.log10(subject.pin_number).to_i + 1
       expect(length).to eq 4
       expect(subject.pin_number.class).to eq Fixnum
@@ -22,15 +22,10 @@ describe Account do
     end
 
     it 'has a expiry date' do
-      date = Date.today.next_year(Account::STANDARD_VALIDITY_YRS).strftime('%m/%y')
+      date = Date.today.next_year(Account::STANDARD_VALIDITY_YRS).strftime('%d/%m/%Y')
       expect(subject.expire_date).to eq date
     end
-    
-    it 'Returns expired account' do
-      subject.expire_date =(Date.today -1).strftime('%Y-%m-%d')
-      message = {status: false, message: 'Expired account', date: Date.today.strftime('%Y-%m-%d')}
-      expect(subject.checkstatus(expire_date:subject.expire_date)).to eq message
-    end
+
 
 
     it 'has a status of valid' do

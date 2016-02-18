@@ -9,38 +9,40 @@ class ATM
     case
       when not_divisible_by_five?(amount)
         message(status: false, message: 'Amount not divisible by 5')
-      when insufficient_funds_in_atm?(amount)
+      when insufficient_funds_in_account?(account_object,amount)
         message(status: false, message: 'Insufficient funds')
       when is_entred_pin_number_invalid?(account_object, entered_pin_number)
-        message()
-      when is_card_expired?(account_object)
-        message()
-      when is_cad_inactive?(account_object)
-        message()
+        message(status: false, message: 'Error. Invalid pin number', amount: amount)
       else
-        message(status: true, message: 'Success', amount: amount)
+        message(status: true, message: 'Success', balance: account_object.balance - amount)
     end
   end
 
   private
 
-  def insufficient_funds_in_atm?(amount)
-    @balance < amount
+  def insufficient_funds_in_account?(account_object,amount)
+    account_object.balance < amount
   end
 
   def not_divisible_by_five?(amount)
     amount % 5 != 0
   end
 
-  def message(options = {})
-    message = {status: options[:status], message: options[:message], date: Date.today.strftime('%Y-%m-%d')}
-    message.merge!({amount: options[:amount]}) if options[:amount]
-    message
-  end
-
   def is_entred_pin_number_invalid?(account, pin)
     account.pin_number != pin
   end
 
+  def message(options = {})
+   message = {status: options[:status], message: options[:message]}
+   if options[:amount]
+     message.merge!({amount: options[:amount]})
+   elsif options[:balance]
+     message.merge!({balance: options[:balance]})
+   elsif options[:card_status]
+     message.merge!({card_status: options[:card_status]})
+   else
+     message
+  end
+end
 
 end
