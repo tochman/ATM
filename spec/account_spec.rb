@@ -25,13 +25,13 @@ describe Account do
       date = Date.today.next_year(Account::STANDARD_VALIDITY_YRS).strftime('%m/%y')
       expect(subject.expire_date).to eq date
     end
-<<<<<<< HEAD
+    
     it 'Returns expired account' do
       subject.expire_date =(Date.today -1).strftime('%Y-%m-%d')
       message = {status: false, message: 'Expired account', date: Date.today.strftime('%Y-%m-%d')}
       expect(subject.checkstatus(expire_date:subject.expire_date)).to eq message
     end
-=======
+
 
     it 'has a status of valid' do
       expect(subject.card_status).to eq :valid
@@ -43,5 +43,4 @@ describe Account do
   end
 
 
->>>>>>> edca3745c4183e0fe44801066bfcdd2bfea14fe4
 end

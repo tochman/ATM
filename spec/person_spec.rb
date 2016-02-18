@@ -21,22 +21,4 @@ describe Person do
   end
 
 
-    xit 'Returns no name message' do
-      subject.name =''
-      message = {status: false, message: 'No name for pereson', date: Date.today.strftime('%Y-%m-%d')}
-      expect(subject.checkstatus(name:subject.name)).to eq message
-    end
-
-    xit 'Negative amount for cash' do
-      subject.cash= -1
-      message = {status: false, message: 'Negative amount for cash', date: Date.today.strftime('%Y-%m-%d')}
-      expect(subject.checkstatus(cash:subject.cash)).to eq message
-    end
-
-    xit 'No pin number for pereson' do
-      subject.pin_number= ''
-      message = {status: false, message: 'No pin number for pereson', date: Date.today.strftime('%Y-%m-%d')}
-      expect(subject.checkstatus(pin_number:subject.pin_number)).to eq message
-    end
-
 end
